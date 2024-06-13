@@ -1,4 +1,6 @@
 # NETFLIX GPT
+    - Can be accessed with below link
+    https://netflixgpt-55be6.web.app/
 
 # Creating React Project
     npx create-react-app nextflix-gpt
@@ -45,3 +47,10 @@
     
 # TMDB 
     - Used to get the Movies Data
+    - Create Account
+        - Edit Profile
+            - API
+            - Create APP
+    - Documentation
+        - developer.themoviedb.org
+    

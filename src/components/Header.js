@@ -4,7 +4,9 @@ import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/store/userSlice';
-import { LOGO } from '../utils/constants';
+import { LOGO, SUPPORTED_LANGUAGES } from '../utils/constants';
+import { toggleGPTSearchView } from '../utils/store/GPTSlice';
+import { changeLanguage } from '../utils/store/configSlice';
 
 const Header = () => {
 
@@ -12,7 +14,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const userDetails = useSelector(store => store.user)
-
+  const showGPTSearch = useSelector(store => store.gpt.showGPTSearch)
   const handleSignOut = () => {
     signOut(auth).then(() => {
       // navigate('/')
@@ -39,18 +41,40 @@ const Header = () => {
     });
     // UnSubscribe when component unmounts
     return () => unsubscribe();
-}, [])
+  }, [])
+
+  const handleGPTSearchClick = () => {
+    // Toggle GPT Search
+    dispatch(toggleGPTSearchView())
+  }
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e?.target?.value))
+  }
 
   return (
     <div className='absolute px-6 py-2 bg-gradient-to-b from-black z-20 w-screen flex justify-between'>
       <img className='w-44' src={LOGO} alt='logo' />
       {
         userDetails && (<div className='flex p-2'>
-                <div className='flex'><p className='text-white'>{userDetails?.displayName}</p>
-                  <img className='w-8 h-8 p-2' src={userDetails?.photoURL} alt="user-icon"/>
-                  </div>
+                {
+                  showGPTSearch ? <select onChange={handleLanguageChange} className='p-2 bg-gray-900 text-white m-2'>
+                  {
+                    SUPPORTED_LANGUAGES.map((eachLanguage) => (
+                      <option key={eachLanguage.identifier} value={eachLanguage.identifier}>{eachLanguage.name}</option>
+                    ))
+                  }
+                  </select> : <></>
+                }
+                
+                <button className='py-2 mx-4 px-4 bg-purple-800 text-white rounded-lg' onClick={() => handleGPTSearchClick()}>{showGPTSearch ? "Home Page" : "GPT Search"}</button>
+                
+                <img className='w-12 h-12' src={userDetails?.photoURL} alt="user-icon"/>
+                {/* <div className='flex p-2'><p className='text-white'>{userDetails?.displayName}</p>
                   
-                  <button className='font-bold text-black cursor-pointer bg-gray-50 p-2' onClick={() => handleSignOut()}>Sign Out</button>
+                  </div> */}
+                  
+                  <button className='py-2 m-2 rounded-lg font-bold text-black cursor-pointer bg-gray-50 p-2' onClick={() => handleSignOut()}>Sign Out</button>
                 </div>)
       }
       

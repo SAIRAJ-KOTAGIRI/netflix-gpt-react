@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { auth } from '../utils/firebase'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/store/userSlice';
+import { BACKGROUND_IMAGE, AVATAR_IMAGE } from '../utils/constants';
 
 const Login = () => {
 
@@ -37,7 +38,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         updateProfile(user, {
-          displayName: name.current.value, photoURL: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+          displayName: name.current.value, photoURL: AVATAR_IMAGE
         }).then(() => {
           const {uid, email, displayName, photoURL} = auth.currentUser;
           dispatch(addUser({
@@ -73,7 +74,7 @@ const Login = () => {
     <div>
       <Header />
       <div className='absolute'>
-        <img src="https://assets.nflxext.com/ffe/siteui/vlv3/51c1d7f7-3179-4a55-93d9-704722898999/03bc4793-4207-4e21-aaec-671f5298b7cd/US-en-20240610-popsignuptwoweeks-perspective_alpha_website_medium.jpg" alt='bg-logo'/>
+        <img src={BACKGROUND_IMAGE} alt='bg-logo'/>
       </div>
       <form className='absolute p-12 bg-black w-4/12 my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80' onSubmit={(e) => e.preventDefault()}>
         <h1 className='font-bold text-3xl py-4'>{isSignInForm ? "Sign In" : "Sign Up"}</h1>

@@ -2,7 +2,6 @@ import React from 'react'
 import Login from './Login'
 import Browse from './Browse'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 
 const Body = () => {
 

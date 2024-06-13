@@ -4,6 +4,7 @@ import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/store/userSlice';
+import { LOGO } from '../utils/constants';
 
 const Header = () => {
 
@@ -42,7 +43,7 @@ const Header = () => {
 
   return (
     <div className='absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-screen flex justify-between'>
-      <img className='w-44' src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt='logo' />
+      <img className='w-44' src={LOGO} alt='logo' />
       {
         userDetails && (<div className='flex p-2'>
                   <img className='w-8 h-8' src={userDetails?.photoURL} alt="user-icon"/>

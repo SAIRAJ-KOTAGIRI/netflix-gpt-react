@@ -53,4 +53,7 @@
             - Create APP
     - Documentation
         - developer.themoviedb.org
-    
+
+# GPT
+    - Go to the below link and create API KEY
+    - https://platform.openai.com/api-keys

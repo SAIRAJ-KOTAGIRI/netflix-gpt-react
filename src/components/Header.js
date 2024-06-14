@@ -53,10 +53,10 @@ const Header = () => {
   }
 
   return (
-    <div className='absolute px-6 py-2 bg-gradient-to-b from-black z-20 w-screen flex justify-between'>
-      <img className='w-44' src={LOGO} alt='logo' />
+    <div className='absolute px-6 py-2 bg-gradient-to-b from-black z-20 w-screen flex md:flex-row flex-col justify-between'>
+      <img className='w-44 mx-auto md:mx-0' src={LOGO} alt='logo' />
       {
-        userDetails && (<div className='flex p-2'>
+        userDetails && (<div className='flex p-2 justify-between'>
                 {
                   showGPTSearch ? <select onChange={handleLanguageChange} className='p-2 bg-gray-900 text-white m-2'>
                   {
@@ -66,14 +66,9 @@ const Header = () => {
                   }
                   </select> : <></>
                 }
+                  <button className='py-2 mx-4 px-4 bg-purple-800 text-white rounded-lg' onClick={() => handleGPTSearchClick()}>{showGPTSearch ? "Home Page" : "GPT Search"}</button>
                 
-                <button className='py-2 mx-4 px-4 bg-purple-800 text-white rounded-lg' onClick={() => handleGPTSearchClick()}>{showGPTSearch ? "Home Page" : "GPT Search"}</button>
-                
-                <img className='w-12 h-12' src={userDetails?.photoURL} alt="user-icon"/>
-                {/* <div className='flex p-2'><p className='text-white'>{userDetails?.displayName}</p>
-                  
-                  </div> */}
-                  
+                  <img className='w-12 h-12 hidden md:block' src={userDetails?.photoURL} alt="user-icon"/>
                   <button className='py-2 m-2 rounded-lg font-bold text-black cursor-pointer bg-gray-50 p-2' onClick={() => handleSignOut()}>Sign Out</button>
                 </div>)
       }
